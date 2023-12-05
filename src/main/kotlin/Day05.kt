@@ -30,7 +30,9 @@ class Day05 {
             val seeds = lines.first().split("\\s".toRegex()).drop(1).map { it.toLong() }
             val almanach = createAlmanach(lines)
             sourcedAlmanach = almanach.associateBy { it.source }
-            return findDestination(seeds, "seed", "location")
+            return seeds.minOf { seed ->
+                findValueAtDestination(seed, "seed", "location")
+            }
         }
 
         fun part02(lines: List<String>): Long {
@@ -102,15 +104,6 @@ fun createAlmanach(lines: List<String>): List<AlmanachEntry> {
     return almanach.toList()
 }
 
-fun findDestination(
-    seeds: List<Long>,
-    start: String,
-    destination: String
-): Long =
-    seeds.minOf { seed ->
-        findValueAtDestination(seed, start, destination)
-    }
-
 fun findValueAtDestination(
     currentNumber: Long,
     currentSource: String,
@@ -120,17 +113,13 @@ fun findValueAtDestination(
     if (entry == null || entry.source == destination) {
         return currentNumber
     }
-
     val next = entry.target
     val validRangeEntry = entry.ranges.find { rangeEntry ->
         rangeEntry.sourceRangeStart <= currentNumber && currentNumber < rangeEntry.sourceRangeStart + rangeEntry.rangeLength
-
     }
     return if (validRangeEntry != null) {
         findValueAtDestination(
-            currentNumber - validRangeEntry.sourceRangeStart + validRangeEntry.destinationRangeStart,
-            next,
-            destination
+            currentNumber - validRangeEntry.sourceRangeStart + validRangeEntry.destinationRangeStart, next, destination
         )
     } else {
         return findValueAtDestination(
