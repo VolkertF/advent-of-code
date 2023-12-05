@@ -53,7 +53,7 @@ fun parallelProcess(flow: Flow<List<Long>>): Long {
             flow.map { seeds ->
                 async {
                     seeds.map { seed ->
-                        findNextDestinationRecursive(
+                        findValueAtDestination(
                             seed,
                             "seed",
                             "location"
@@ -62,16 +62,15 @@ fun parallelProcess(flow: Flow<List<Long>>): Long {
                 }
             }.buffer(FLOW_COLLECT_CHUNK_SIZE).map { it.await() }
                 .map {
-                val listMin = it.min()
-                synchronized(minValue) {
-                    minValue.set(
-                        min(
-                            listMin, minValue.get()
+                    val listMin = it.min()
+                    synchronized(minValue) {
+                        minValue.set(
+                            min(
+                                listMin, minValue.get()
+                            )
                         )
-                    )
-                }
-            }
-                .collect()
+                    }
+                }.collect()
         }
     }
     return minValue.get()
@@ -109,10 +108,10 @@ fun findDestination(
     destination: String
 ): Long =
     seeds.minOf { seed ->
-        findNextDestinationRecursive(seed, start, destination)
+        findValueAtDestination(seed, start, destination)
     }
 
-fun findNextDestinationRecursive(
+fun findValueAtDestination(
     currentNumber: Long,
     currentSource: String,
     destination: String
@@ -124,17 +123,17 @@ fun findNextDestinationRecursive(
 
     val next = entry.target
     val validRangeEntry = entry.ranges.find { rangeEntry ->
-        rangeEntry.sourceRangeStart <= currentNumber && currentNumber <= rangeEntry.sourceRangeStart + rangeEntry.rangeLength
+        rangeEntry.sourceRangeStart <= currentNumber && currentNumber < rangeEntry.sourceRangeStart + rangeEntry.rangeLength
 
     }
     return if (validRangeEntry != null) {
-        findNextDestinationRecursive(
+        findValueAtDestination(
             currentNumber - validRangeEntry.sourceRangeStart + validRangeEntry.destinationRangeStart,
             next,
             destination
         )
     } else {
-        return findNextDestinationRecursive(
+        return findValueAtDestination(
             currentNumber, next, destination
         )
     }
