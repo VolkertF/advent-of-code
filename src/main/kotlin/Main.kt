@@ -22,7 +22,12 @@ fun main() {
 //    println(Day04.part02(day04part01))
 
     // DAY 05
-    val day05part01 = resourceToStringList("day05_part01.txt")
+//    val day05part01 = resourceToStringList("day05_part01.txt")
 //    println(Day05.part01(day05part01))
-        println(Day05.part02(day05part01))
+//        println(Day05.part02(day05part01))
+
+    // DAY 06
+    val day06part01 = resourceToStringList("day06_part01.txt")
+//    println(Day06.part01(day06part01))
+    println(Day06.part02(day06part01))
 }
