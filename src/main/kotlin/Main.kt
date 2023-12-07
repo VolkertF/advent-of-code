@@ -33,6 +33,6 @@ fun main() {
 
     // DAY 07
     val day07part01 = resourceToStringList("day07_part01.txt")
-    println(Day07.part01(day07part01))
-//    println(Day07.part02(day07part01))
+//    println(Day07.part01(day07part01))
+    println(Day07.part02(day07part01))
 }
