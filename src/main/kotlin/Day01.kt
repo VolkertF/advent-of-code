@@ -1,6 +1,5 @@
 
-class Day01 {
-    companion object {
+object Day01 {
         fun part01(lines: List<String>): Int = lines.sumOf { line ->
             findDigitsForLine(line, digits)
         }
@@ -9,8 +8,6 @@ class Day01 {
         fun part02(lines: List<String>): Int = lines.sumOf { line ->
             findDigitsForLine(line,digits+words)
         }
-
-    }
 }
 
 val words = mapOf(

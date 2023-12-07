@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test
 import util.resourceToStringList
 
-class Day01Test {
+object Day01Test {
 
     @Test
     fun `part 01 example input should evaluate to 142`() {

@@ -1,5 +1,4 @@
-class Day06 {
-    companion object {
+object Day06 {
         fun part01(lines: List<String>): Int {
             val times = lines[0].split(":")[1].trim()
                 .split("\\s+".toRegex())
@@ -20,9 +19,6 @@ class Day06 {
                 .toLong()
             return reduceTimesToProductOfWinningOptions(listOf(times), listOf(distances))
         }
-
-
-    }
 }
 
 fun reduceTimesToProductOfWinningOptions(times: List<Long>, distances: List<Long>): Int =

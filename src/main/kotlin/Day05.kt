@@ -24,8 +24,7 @@ var sourcedAlmanach: Map<String, AlmanachEntry> = emptyMap()
 @OptIn(DelicateCoroutinesApi::class)
 val customDispatcher = newFixedThreadPoolContext(THREADS, "customDispatcher")
 
-class Day05 {
-    companion object {
+object Day05 {
         fun part01(lines: List<String>): Long {
             val seeds = lines.first().split("\\s".toRegex()).drop(1).map { it.toLong() }
             val almanach = createAlmanach(lines)
@@ -34,7 +33,6 @@ class Day05 {
                 findValueAtDestination(seed, "seed", "location")
             }
         }
-
         fun part02(lines: List<String>): Long {
             val seeds = lines.first().split("\\s".toRegex()).drop(1).map { it.toLong() }
             val seedPairs = seeds.chunked(2)
@@ -43,9 +41,6 @@ class Day05 {
             sourcedAlmanach = almanach.associateBy { it.source }
             return parallelProcess(seedRanges.asSequence().flatten().chunked(FLOW_CHUNK_SIZE).asFlow())
         }
-
-
-    }
 }
 
 fun parallelProcess(flow: Flow<List<Long>>): Long {

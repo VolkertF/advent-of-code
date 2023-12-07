@@ -1,6 +1,4 @@
-class Day03 {
-    companion object {
-
+object Day03 {
         fun part01(field: Engine): Int =
             extractNumberWindows(field).flatten()
                 .map { findAdjacentSymbols(field, it) }.sumOf { it.chars.toInt() }
@@ -10,7 +8,6 @@ class Day03 {
                 .map { findAdjacentSymbols(field, it) }.filter { it.isAdjacentToGear() }.groupBy { it.adjacentSymbol }
                 .filter { it.value.size == 2 }.values.map { groupedWindows -> groupedWindows.map { window -> window.chars.toInt() } }
                 .sumOf { it.reduce { acc, i -> acc * i } }
-    }
 }
 
 typealias Engine = List<List<Char>>

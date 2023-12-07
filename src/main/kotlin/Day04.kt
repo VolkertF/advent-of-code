@@ -1,8 +1,6 @@
 import kotlin.math.pow
 
-class Day04 {
-    companion object {
-
+object Day04 {
         fun part01(lines: List<String>):Int = getListOfWinningCards(lines)
             .sumOf { if (it.size >= 2) 2.0.pow(it.size - 1.0) else it.size.toDouble() }.toInt()
 
@@ -22,8 +20,6 @@ class Day04 {
                 }.joinToString()
             return multiplierArray.sum()
         }
-
-    }
 }
 
 fun getListOfWinningCards(lines: List<String>) = lines.map {

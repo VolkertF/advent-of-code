@@ -1,6 +1,4 @@
-class Day02 {
-    companion object {
-
+object Day02 {
         fun part01(lines: List<String>) =
             lines.map { line -> lineToGameData(line) }.filter { isValidGame(it.second) }.sumOf { validGame ->
                 validGame.first
@@ -8,7 +6,6 @@ class Day02 {
 
         fun part02(lines: List<String>) =
             lines.map { line -> lineToGameData(line) }.sumOf { getPowerOfGame(it.second) }
-    }
 }
 
 typealias CubeColor = String
