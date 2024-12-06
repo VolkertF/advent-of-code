@@ -2,12 +2,12 @@ package `2024`
 
 class Day04 {
     companion object {
-        fun part01(day03part01: List<List<Char>>): Int =
-            countLinesBidirectional(day03part01)
-                .plus(countLinesBidirectional(rotate90(day03part01)))
-                .plus(checkCross(day03part01))
+        fun part01(day04part01: List<List<Char>>): Int =
+            countLinesBidirectional(day04part01)
+                .plus(countLinesBidirectional(rotate90(day04part01)))
+                .plus(checkCross(day04part01))
 
-        fun part02(day03part01: List<List<Char>>): Int = checkMASCross(day03part01)
+        fun part02(day04part01: List<List<Char>>): Int = checkMASCross(day04part01)
     }
 }
 

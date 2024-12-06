@@ -2,15 +2,15 @@ package `2024`
 
 class Day05 {
     companion object {
-        fun part01(day03part01: List<String>): Int = Pair(extractRules(day03part01), extractUpdates(day03part01))
+        fun part01(day05part01: List<String>): Int = Pair(extractRules(day05part01), extractUpdates(day05part01))
             .let { (rules, updates) ->
                 findValidUpdates(updates, rules).sumOf {
                     it[it.size / 2]
                 }
             }
 
-        fun part02(day03part01: List<String>): Int {
-            return Pair(extractRules(day03part01), extractUpdates(day03part01))
+        fun part02(day05part01: List<String>): Int {
+            return Pair(extractRules(day05part01), extractUpdates(day05part01))
                 .let { (rules, updates) ->
                     findInvalidUpdates(updates, rules).map { invalidUpdate ->
                         orderUpdate(invalidUpdate, rules)
