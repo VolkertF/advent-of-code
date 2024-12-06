@@ -1,3 +1,5 @@
+package `2023`
+
 object Day07 {
     fun part01(lines: List<String>): Long = parseLines(lines)
         .asSequence()

@@ -1,4 +1,4 @@
-
+package `2023`
 object Day01 {
         fun part01(lines: List<String>): Int = lines.sumOf { line ->
             findDigitsForLine(line, digits)
@@ -6,7 +6,7 @@ object Day01 {
 
 
         fun part02(lines: List<String>): Int = lines.sumOf { line ->
-            findDigitsForLine(line,digits+words)
+            findDigitsForLine(line, digits + words)
         }
 }
 

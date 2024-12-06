@@ -1,3 +1,4 @@
+import `2023`.Day03
 import org.junit.jupiter.api.Test
 import util.resourceTo2DStringList
 

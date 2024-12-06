@@ -1,3 +1,5 @@
+package `2023`
+
 object Day06 {
         fun part01(lines: List<String>): Int {
             val times = lines[0].split(":")[1].trim()

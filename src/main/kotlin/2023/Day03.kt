@@ -1,3 +1,5 @@
+package `2023`
+
 object Day03 {
         fun part01(field: Engine): Int =
             extractNumberWindows(field).flatten()

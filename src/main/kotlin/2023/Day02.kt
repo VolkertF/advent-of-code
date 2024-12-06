@@ -1,3 +1,5 @@
+package `2023`
+
 object Day02 {
         fun part01(lines: List<String>) =
             lines.map { line -> lineToGameData(line) }.filter { isValidGame(it.second) }.sumOf { validGame ->
