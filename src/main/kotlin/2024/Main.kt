@@ -1,6 +1,6 @@
 package `2024`
 
-import util.resourceToStringList
+import util.resourceTo2DStringList
 
 fun main() {
     // DAY 01
@@ -19,9 +19,9 @@ fun main() {
 //    println(Day03.part02(day03part01))
 
     // DAY 04
-    val day04part01 = resourceToStringList("2024/day04.txt")
-    println(Day04.part01(day04part01))
-//    println(Day04.part02(day04part01))
+    val day04part01 = resourceTo2DStringList("2024/day04.txt")
+//    println(Day04.part01(day04part01))
+    println(Day04.part02(day04part01))
 
     // DAY 05
 //    val day05part01 = resourceToStringList("2024/day05.txt")
