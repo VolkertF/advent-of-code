@@ -9,8 +9,8 @@ class Day05 {
                 }
             }
 
-        fun part02(day05part01: List<String>): Int {
-            return Pair(extractRules(day05part01), extractUpdates(day05part01))
+        fun part02(day05part02: List<String>): Int {
+            return Pair(extractRules(day05part02), extractUpdates(day05part02))
                 .let { (rules, updates) ->
                     findInvalidUpdates(updates, rules).map { invalidUpdate ->
                         orderUpdate(invalidUpdate, rules)

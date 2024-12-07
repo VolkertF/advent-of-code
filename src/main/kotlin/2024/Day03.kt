@@ -9,9 +9,9 @@ class Day03 {
         }
 
 
-        fun part02(day03part01: List<String>): Int = run {
+        fun part02(day03part02: List<String>): Int = run {
             var enabled = true
-            day03part01.flatMap { line ->
+            day03part02.flatMap { line ->
                 mulDoDontRegex.findAll(line).map {
                     if (it.value.startsWith("mul(") && enabled) {
                         it.groupValues[1].toInt() * it.groupValues[2].toInt()

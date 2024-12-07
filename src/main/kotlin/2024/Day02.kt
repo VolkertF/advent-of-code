@@ -11,8 +11,8 @@ class Day02 {
             }
         }
 
-        fun part02(day02part01: List<String>): Int {
-            return day02part01.count { reportString ->
+        fun part02(day02part02: List<String>): Int {
+            return day02part02.count { reportString ->
                 isSafeReportWithTolerance(reportString.toIntList())
             }
         }

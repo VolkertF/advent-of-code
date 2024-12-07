@@ -13,8 +13,8 @@ class Day01 {
             }.sum()
         }
 
-        fun part02(day01part01: List<String>): Int {
-            val (leftSide, rightSide) = splitToIntLists(day01part01)
+        fun part02(day01part02: List<String>): Int {
+            val (leftSide, rightSide) = splitToIntLists(day01part02)
             val storedCounter = mutableMapOf<Int, Int>()
             return leftSide.sumOf { left ->
                 if (storedCounter.containsKey(left)) {

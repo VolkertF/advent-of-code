@@ -16,14 +16,14 @@ class Day06 {
             ).distinct().size
         }
 
-        fun part02(day06part01: Grid): Int {
-            val guard = getGuard(day06part01)
+        fun part02(day06part02: Grid): Int {
+            val guard = getGuard(day06part02)
             val possibleObstacleLocations = moveInDirection(
-                day06part01,
+                day06part02,
                 guard.position,
                 guard.facingDirection,
             ).distinct().minus(guard.position)
-            return calculateAllLoopingPaths(guard, possibleObstacleLocations, day06part01)
+            return calculateAllLoopingPaths(guard, possibleObstacleLocations, day06part02)
         }
     }
 }

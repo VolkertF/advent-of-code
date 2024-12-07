@@ -7,7 +7,7 @@ class Day04 {
                 .plus(countLinesBidirectional(rotate90(day04part01)))
                 .plus(checkCross(day04part01))
 
-        fun part02(day04part01: List<List<Char>>): Int = checkMASCross(day04part01)
+        fun part02(day04part02: List<List<Char>>): Int = checkMASCross(day04part02)
     }
 }
 
