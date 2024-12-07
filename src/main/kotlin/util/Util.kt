@@ -10,7 +10,7 @@ fun bufferedReaderToStringList(reader: BufferedReader?): List<String> = reader?.
 fun bufferedReaderTo2DStringList(reader: BufferedReader?): List<List<Char>> =
     reader?.lines()?.toList()?.map { it.toCharArray().toList() } ?: emptyList()
 fun resourceToStringList(path: String): List<String> = bufferedReaderToStringList(getResourceBufferedReader(path))
-fun resourceTo2DStringList(path: String): List<List<Char>> =
+fun resourceTo2DCharList(path: String): List<List<Char>> =
     bufferedReaderTo2DStringList(getResourceBufferedReader(path))
 fun getAverageExecutionTime(repeat: Int, fn: () -> Unit): Duration {
     var average = 0.0

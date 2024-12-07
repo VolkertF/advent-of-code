@@ -14,7 +14,7 @@ fun main() {
 //    println(Day02.part02(day02part01))
 
     // DAY 03
-//    val day03part01 = resourceTo2DStringList("2023/day03_part01.txt")
+//    val day03part01 = resourceTo2DCharList("2023/day03_part01.txt")
 //    println(Day03.part01(day03part01))
 //    println(Day03.part02(day03part01))
 

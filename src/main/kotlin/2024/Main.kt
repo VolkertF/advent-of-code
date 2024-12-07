@@ -1,6 +1,7 @@
 package `2024`
 
-import util.resourceToStringList
+import util.getAverageExecutionTime
+import util.resourceTo2DCharList
 
 fun main() {
     // DAY 01
@@ -19,7 +20,7 @@ fun main() {
 //    println(Day03.part02(day03part01))
 
     // DAY 04
-//    val day04part01 = resourceTo2DStringList("2024/day04.txt")
+//    val day04part01 = resourceTo2DCharList("2024/day04.txt")
 //    println(Day04.part01(day04part01))
 //    println(Day04.part02(day04part01))
 
@@ -29,8 +30,8 @@ fun main() {
 //    println(Day05.part02(day05part01))
 
     // DAY 06
-    val day06part01 = resourceToStringList("2024/day06.txt")
-    println(Day06.part01(day06part01))
-//    println(Day06.part02(day06part01))
+    val day06part01 = resourceTo2DCharList("2024/day06.txt")
+//    println(Day06.part01(day06part01))
+    println(Day06.part02(day06part01))
 
 }
