@@ -68,8 +68,8 @@ fun findAllAntinodesForPosition(
 ): List<Position> =
     candidates.flatMap { candidate ->
         listOf(
-            findAnti(fromPosition = candidate, towardsPosition = position, bounds = bounds, limit = limit, depth = 0),
-            findAnti(fromPosition = position, towardsPosition = candidate, bounds = bounds, limit = limit, depth = 0),
+            findAntinodesAlongLine(fromPosition = candidate, towardsPosition = position, bounds = bounds, limit = limit, depth = 0),
+            findAntinodesAlongLine(fromPosition = position, towardsPosition = candidate, bounds = bounds, limit = limit, depth = 0),
         ).flatten()
     }.let {
         if (includeStations) {
@@ -79,7 +79,7 @@ fun findAllAntinodesForPosition(
         }
     }
 
-tailrec fun findAnti(
+tailrec fun findAntinodesAlongLine(
     fromPosition: Position,
     towardsPosition: Position,
     bounds: Pair<Int, Int>,
@@ -91,7 +91,7 @@ tailrec fun findAnti(
     return if (depth >= limit || isOutOfBounds(nextAntinode, bounds)) {
         currentList
     } else {
-        findAnti(
+        findAntinodesAlongLine(
             fromPosition = towardsPosition,
             towardsPosition = nextAntinode,
             bounds = bounds,
