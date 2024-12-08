@@ -5,23 +5,27 @@ import kotlin.math.abs
 class Day08 {
     companion object {
         fun part01(day06part01: List<List<Char>>): Int =
-            findAntinodes(day06part01).flatten().distinct().count()
-
+            findAntinodes(grid = day06part01, includeStations = false, limit = 1).flatten().distinct().count()
 
 
         fun part02(day06part02: List<List<Char>>): Int {
-            getStations(day06part02).also { println(it) }
-            return findAntinodes(day06part02).flatten().distinct().count()
+            return findAntinodes(grid = day06part02, includeStations = true, limit = Integer.MAX_VALUE).flatten()
+                .distinct().count()
         }
 
     }
 }
 
-fun findAntinodes(grid: List<List<Char>>) =
+fun findAntinodes(grid: List<List<Char>>, includeStations: Boolean, limit: Int) =
     getStations(grid)
-        .map { stationEntry->
+        .map { stationEntry ->
             val bounds = Pair(grid.size, grid[0].size)
-            findAntinodesForStation(stationEntry.value,bounds ).filter { position-> !isOutOfBounds(position, bounds) }
+            findAllAntinodesForStation(
+                stations = stationEntry.value,
+                bounds = bounds,
+                includeStations = includeStations,
+                limit = limit
+            )
         }
 
 private fun getStations(grid: List<List<Char>>) =
@@ -39,30 +43,78 @@ private fun getStations(grid: List<List<Char>>) =
         }
     }.filter { it.value.size > 1 }
 
-
-fun findAntinodesForStation(stations: List<Position>, bounds: Pair<Int,Int>): List<Position> =
+fun findAllAntinodesForStation(
+    stations: List<Position>,
+    bounds: Pair<Int, Int>,
+    includeStations: Boolean,
+    limit: Int
+): List<Position> =
     stations.flatMapIndexed { index, current ->
-        findAntinodesForPosition(current, stations.minusIndex(index))
+        findAllAntinodesForPosition(
+            position = current,
+            candidates = stations.minusIndex(index),
+            bounds = bounds,
+            includeStations = includeStations,
+            limit = limit
+        )
     }
 
-
-fun findAntinodesForPosition(position: Position, candidates: List<Position>): List<Position> =
+fun findAllAntinodesForPosition(
+    position: Position,
+    candidates: List<Position>,
+    bounds: Pair<Int, Int>,
+    includeStations: Boolean,
+    limit: Int
+): List<Position> =
     candidates.flatMap { candidate ->
-        val yDistance = abs(candidate.first - position.first)
-        val xDistance = abs(candidate.second - position.second)
-        val towardsPosX =
-            if (candidate.first >= position.first) position.first - yDistance else position.first + yDistance
-        val towardsPosY =
-            if (candidate.second >= position.second) position.second - xDistance else position.second + xDistance
-        val towardsCandidateX =
-            if (candidate.first >= position.first) candidate.first + yDistance else candidate.first - yDistance
-        val towardsCandidateY =
-            if (candidate.second >= position.second) candidate.second + xDistance else candidate.second - xDistance
-        val pos1 = Pair(towardsPosX, towardsPosY)
-        val pos2 = Pair(towardsCandidateX, towardsCandidateY)
-        listOf(pos1, pos2)
+        listOf(
+            findAnti(fromPosition = candidate, towardsPosition = position, bounds = bounds, limit = limit, depth = 0),
+            findAnti(fromPosition = position, towardsPosition = candidate, bounds = bounds, limit = limit, depth = 0),
+        ).flatten()
+    }.let {
+        if (includeStations) {
+            it.plus(candidates).plus(position)
+        } else {
+            it
+        }
     }
 
-fun isOutOfBounds(pair: Position, bounds:Pair<Int,Int>): Boolean {
+tailrec fun findAnti(
+    fromPosition: Position,
+    towardsPosition: Position,
+    bounds: Pair<Int, Int>,
+    limit: Int,
+    depth: Int,
+    currentList: List<Position> = emptyList()
+): List<Position> {
+    val nextAntinode = calculateNextAntinode(fromPosition, towardsPosition)
+    return if (depth >= limit || isOutOfBounds(nextAntinode, bounds)) {
+        currentList
+    } else {
+        findAnti(
+            fromPosition = towardsPosition,
+            towardsPosition = nextAntinode,
+            bounds = bounds,
+            depth = depth + 1,
+            limit = limit,
+            currentList = currentList.plus(nextAntinode),
+        )
+    }
+}
+
+fun calculateNextAntinode(
+    fromPosition: Position,
+    towardsPosition: Position
+): Position {
+    val yDistance = abs(fromPosition.first - towardsPosition.first)
+    val xDistance = abs(fromPosition.second - towardsPosition.second)
+    val newPosX =
+        if (fromPosition.first >= towardsPosition.first) towardsPosition.first - yDistance else towardsPosition.first + yDistance
+    val newPosY =
+        if (fromPosition.second >= towardsPosition.second) towardsPosition.second - xDistance else towardsPosition.second + xDistance
+    return Pair(newPosX, newPosY)
+}
+
+fun isOutOfBounds(pair: Position, bounds: Pair<Int, Int>): Boolean {
     return pair.first < 0 || pair.first >= bounds.first || pair.second >= bounds.second || pair.second < 0
 }
