@@ -4,14 +4,14 @@ typealias Operator = (Long, Long) -> Long
 
 class Day07 {
     companion object {
-        fun part01(day06part01: List<String>): Long =
-            day06part01.map(::extractTestData)
+        fun part01(day07part01: List<String>): Long =
+            day07part01.map(::extractTestData)
                 .sumOf { (goal, operands) ->
                     processTest(goal, operands, generatePermutations(operands.size - 1, listOf(Plus(), Multiply())))
                 }
 
-        fun part02(day06part02: List<String>): Long =
-            day06part02.map(::extractTestData)
+        fun part02(day07part02: List<String>): Long =
+            day07part02.map(::extractTestData)
                 .sumOf { (goal, operands) ->
                     processTest(
                         goal,

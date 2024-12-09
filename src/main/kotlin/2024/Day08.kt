@@ -4,12 +4,12 @@ import kotlin.math.abs
 
 class Day08 {
     companion object {
-        fun part01(day06part01: List<List<Char>>): Int =
-            findAntinodes(grid = day06part01, includeStations = false, limit = 1).flatten().distinct().count()
+        fun part01(day08part01: List<List<Char>>): Int =
+            findAntinodes(grid = day08part01, includeStations = false, limit = 1).flatten().distinct().count()
 
 
-        fun part02(day06part02: List<List<Char>>): Int {
-            return findAntinodes(grid = day06part02, includeStations = true, limit = Integer.MAX_VALUE).flatten()
+        fun part02(day08part02: List<List<Char>>): Int {
+            return findAntinodes(grid = day08part02, includeStations = true, limit = Integer.MAX_VALUE).flatten()
                 .distinct().count()
         }
 
