@@ -4,7 +4,7 @@ repositories{
 
 plugins{
     id("idea")
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "2.1.0"
 }
 
 dependencies{

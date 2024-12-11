@@ -18,6 +18,9 @@ fun resourceToCharSequence(path: String): Sequence<Char> =
 fun resourceTo2DCharList(path: String): List<List<Char>> =
     bufferedReaderTo2DStringList(getResourceBufferedReader(path))
 
+fun resourceTo2DIntList(path: String): List<List<Int>> =
+    bufferedReaderTo2DStringList(getResourceBufferedReader(path)).map {line-> line.map {char-> char.digitToInt() } }
+
 fun getAverageExecutionTime(repeat: Int, fn: () -> Unit): Duration {
     var average = 0.0
     repeat(repeat) {
@@ -29,3 +32,5 @@ fun getAverageExecutionTime(repeat: Int, fn: () -> Unit): Duration {
 }
 
 fun printAverageExecutionTime(repeat: Int, fn: () -> Unit) = println(getAverageExecutionTime(repeat, fn))
+
+fun <E> List<List<E>>.isInBounds(row:Int,column:Int):Boolean = this.isNotEmpty() && row >= 0 && row < this.size && column < this[0].size && column >= 0

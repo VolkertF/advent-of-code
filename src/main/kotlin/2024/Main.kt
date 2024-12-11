@@ -1,5 +1,6 @@
 package `2024`
 
+import util.resourceTo2DIntList
 import util.resourceToCharSequence
 
 fun main() {
@@ -44,7 +45,12 @@ fun main() {
 //    println(Day08.part02(day08part01))
 
     // DAY 09
-    val day09part01 = resourceToCharSequence("2024/day09.txt")
+//    val day09part01 = resourceToCharSequence("2024/day09.txt")
 //    println(Day09.part01(day09part01))
-    println(Day09.part02(day09part01))
+//    println(Day09.part02(day09part01))
+
+    // DAY 10
+    val day10part01 = resourceTo2DIntList("2024/day10.txt")
+//    println(Day10.part01(day10part01))
+    println(Day10.part02(day10part01))
 }

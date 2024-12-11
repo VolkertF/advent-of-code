@@ -8,9 +8,9 @@ class Day09 {
             day09part01.toBlockRepresentation().toList().defrag().calcCheckSum()
 
 
-        fun part02(day09part02: Sequence<Char>): Long {
-            return day09part02.toBlockRepresentation().toList().defrag2()
-        }
+        fun part02(day09part02: Sequence<Char>): Long =
+             day09part02.toBlockRepresentation().toList().defrag2()
+
     }
 }
 
