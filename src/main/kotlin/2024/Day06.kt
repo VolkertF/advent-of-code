@@ -1,9 +1,10 @@
 package `2024`
 
 import kotlinx.coroutines.*
+import util.Direction2D
+import util.Grid
+import util.Position
 
-typealias Position = Pair<Int, Int>
-typealias Grid = List<List<Char>>
 
 class Day06 {
     companion object {
@@ -51,25 +52,23 @@ fun calculateAllLoopingPaths(guard: Guard, possibleObstacleLocations: List<Posit
     }
 
 
-enum class Direction { UP, DOWN, LEFT, RIGHT }
-
-fun directionFromChar(char: Char): Direction? = when (char) {
-    '^' -> Direction.UP
-    'v' -> Direction.DOWN
-    '<' -> Direction.LEFT
-    '>' -> Direction.RIGHT
+fun directionFromChar(char: Char): Direction2D? = when (char) {
+    '^' -> Direction2D.UP
+    'v' -> Direction2D.DOWN
+    '<' -> Direction2D.LEFT
+    '>' -> Direction2D.RIGHT
     else -> null
 }
 
-fun Direction.turnRight(): Direction = when (this) {
-    Direction.UP -> Direction.RIGHT
-    Direction.RIGHT -> Direction.DOWN
-    Direction.DOWN -> Direction.LEFT
-    Direction.LEFT -> Direction.UP
+fun Direction2D.turnRight(): Direction2D = when (this) {
+    Direction2D.UP -> Direction2D.RIGHT
+    Direction2D.RIGHT -> Direction2D.DOWN
+    Direction2D.DOWN -> Direction2D.LEFT
+    Direction2D.LEFT -> Direction2D.UP
 }
 
 
-data class Guard(val position: Position, val facingDirection: Direction)
+data class Guard(val position: Position, val facingDirection: Direction2D)
 
 fun getGuard(grid: Grid): Guard {
     grid.forEachIndexed { rowIndex, row ->
@@ -80,18 +79,18 @@ fun getGuard(grid: Grid): Guard {
             }
         }
     }
-    return Guard(Position(0, 0), Direction.UP)
+    return Guard(Position(0, 0), Direction2D.UP)
 }
 
 fun Position.moveUp(): Position = Pair(this.first - 1, this.second)
 fun Position.moveDown(): Position = Pair(this.first + 1, this.second)
 fun Position.moveLeft(): Position = Pair(this.first, this.second - 1)
 fun Position.moveRight(): Position = Pair(this.first, this.second + 1)
-fun Position.moveInDirection(direction: Direction): Position = when (direction) {
-    Direction.UP -> this.moveUp()
-    Direction.DOWN -> this.moveDown()
-    Direction.LEFT -> this.moveLeft()
-    Direction.RIGHT -> this.moveRight()
+fun Position.moveInDirection(direction: Direction2D): Position = when (direction) {
+    Direction2D.UP -> this.moveUp()
+    Direction2D.DOWN -> this.moveDown()
+    Direction2D.LEFT -> this.moveLeft()
+    Direction2D.RIGHT -> this.moveRight()
 }
 
 fun Position.isOutOfBounds(grid: Grid): Boolean =
@@ -104,7 +103,7 @@ fun hasSeenObstacle(seenObstacles: List<Obstacle>, obstacle: Obstacle): Boolean 
 tailrec fun moveUntilDone(
     grid: Grid,
     startingPos: Position,
-    direction: Direction,
+    direction: Direction2D,
     visited: List<Position> = emptyList(),
     seenObstacles: List<Obstacle> = emptyList()
 ): List<Position> {
@@ -122,12 +121,12 @@ tailrec fun moveUntilDone(
     }
 }
 
-data class Obstacle(val position: Position, val direction: Direction)
+data class Obstacle(val position: Position, val direction: Direction2D)
 
 fun moveInDirection(
     grid: Grid,
     startingPos: Position,
-    direction: Direction,
+    direction: Direction2D,
 ): List<Position> {
     return moveUntilDone(grid, startingPos, direction)
 }

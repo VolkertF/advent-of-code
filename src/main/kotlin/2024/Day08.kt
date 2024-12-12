@@ -1,5 +1,6 @@
 package `2024`
 
+import util.Position
 import kotlin.math.abs
 
 class Day08 {

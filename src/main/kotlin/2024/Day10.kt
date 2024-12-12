@@ -1,5 +1,6 @@
 package `2024`
 
+import util.Position
 import util.isInBounds
 
 class Day10 {
