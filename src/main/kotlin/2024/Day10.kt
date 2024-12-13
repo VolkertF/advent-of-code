@@ -1,18 +1,19 @@
 package `2024`
 
+import util.Grid
 import util.Position
 import util.isInBounds
 
 class Day10 {
     companion object {
-        fun part01(day10part01: List<List<Int>>): Int = day10part01.findAllTrailheads().map { it.value.toSet().count() }.sum()
+        fun part01(day10part01: Grid<Int>): Int = day10part01.findAllTrailheads().map { it.value.toSet().count() }.sum()
 
 
-        fun part02(day10part02: List<List<Int>>): Int = day10part02.findAllTrailheads().map { it.value.count() }.sum()
+        fun part02(day10part02: Grid<Int>): Int = day10part02.findAllTrailheads().map { it.value.count() }.sum()
     }
 }
 
-fun List<List<Int>>.findAllTrailheads(): Map<Position, List<Position>> =
+fun Grid<Int>.findAllTrailheads(): Map<Position, List<Position>> =
     foldIndexed(emptyMap()) { rowIndex, lineAcc, line ->
         line.foldIndexed(lineAcc) { columnIndex, acc, height ->
             if (height == 0) {
@@ -30,7 +31,7 @@ fun List<List<Int>>.findAllTrailheads(): Map<Position, List<Position>> =
     }
 
 fun findTrailsForPosition(
-    grid: List<List<Int>>,
+    grid: Grid<Int>,
     rowIndex: Int,
     columnIndex: Int,
     result: List<List<Position>> = emptyList(),

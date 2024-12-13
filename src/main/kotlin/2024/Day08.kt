@@ -1,15 +1,16 @@
 package `2024`
 
+import util.Grid
 import util.Position
 import kotlin.math.abs
 
 class Day08 {
     companion object {
-        fun part01(day08part01: List<List<Char>>): Int =
+        fun part01(day08part01: Grid<Char>): Int =
             findAntinodes(grid = day08part01, includeStations = false, limit = 1).flatten().distinct().count()
 
 
-        fun part02(day08part02: List<List<Char>>): Int {
+        fun part02(day08part02: Grid<Char>): Int {
             return findAntinodes(grid = day08part02, includeStations = true, limit = Integer.MAX_VALUE).flatten()
                 .distinct().count()
         }
@@ -17,7 +18,7 @@ class Day08 {
     }
 }
 
-fun findAntinodes(grid: List<List<Char>>, includeStations: Boolean, limit: Int) =
+fun findAntinodes(grid: Grid<Char>, includeStations: Boolean, limit: Int) =
     getStations(grid)
         .map { stationEntry ->
             val bounds = Pair(grid.size, grid[0].size)
@@ -29,7 +30,7 @@ fun findAntinodes(grid: List<List<Char>>, includeStations: Boolean, limit: Int) 
             )
         }
 
-private fun getStations(grid: List<List<Char>>) =
+private fun getStations(grid: Grid<Char>) =
     grid.foldIndexed(emptyMap<Char, List<Position>>()) { index, acc, line ->
         line.foldIndexed(acc) { index2, acc2, char ->
             if (char == '.') {

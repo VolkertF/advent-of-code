@@ -8,7 +8,7 @@ import util.Position
 
 class Day06 {
     companion object {
-        fun part01(day06part01: Grid): Int {
+        fun part01(day06part01: Grid<Char>): Int {
             val guard = getGuard(day06part01)
             return moveInDirection(
                 day06part01,
@@ -17,7 +17,7 @@ class Day06 {
             ).distinct().size
         }
 
-        fun part02(day06part02: Grid): Int {
+        fun part02(day06part02: Grid<Char>): Int {
             val guard = getGuard(day06part02)
             val possibleObstacleLocations = moveInDirection(
                 day06part02,
@@ -29,7 +29,7 @@ class Day06 {
     }
 }
 
-fun calculateAllLoopingPaths(guard: Guard, possibleObstacleLocations: List<Position>, grid: Grid) =
+fun calculateAllLoopingPaths(guard: Guard, possibleObstacleLocations: List<Position>, grid: Grid<Char>) =
     runBlocking {
         withContext(Dispatchers.IO) {
             possibleObstacleLocations.map {
@@ -70,7 +70,7 @@ fun Direction2D.turnRight(): Direction2D = when (this) {
 
 data class Guard(val position: Position, val facingDirection: Direction2D)
 
-fun getGuard(grid: Grid): Guard {
+fun getGuard(grid: Grid<Char>): Guard {
     grid.forEachIndexed { rowIndex, row ->
         row.forEachIndexed { columnIndex, position ->
             val direction = directionFromChar(position)
@@ -93,15 +93,15 @@ fun Position.moveInDirection(direction: Direction2D): Position = when (direction
     Direction2D.RIGHT -> this.moveRight()
 }
 
-fun Position.isOutOfBounds(grid: Grid): Boolean =
+fun Position.isOutOfBounds(grid: Grid<Char>): Boolean =
     this.first >= grid.size || this.first < 0 || this.second >= grid[0].size || this.second < 0
 
-fun Position.isObstacle(grid: Grid): Boolean = grid[this.first][this.second] == '#'
+fun Position.isObstacle(grid: Grid<Char>): Boolean = grid[this.first][this.second] == '#'
 
 fun hasSeenObstacle(seenObstacles: List<Obstacle>, obstacle: Obstacle): Boolean = seenObstacles.contains(obstacle)
 
 tailrec fun moveUntilDone(
-    grid: Grid,
+    grid: Grid<Char>,
     startingPos: Position,
     direction: Direction2D,
     visited: List<Position> = emptyList(),
@@ -124,7 +124,7 @@ tailrec fun moveUntilDone(
 data class Obstacle(val position: Position, val direction: Direction2D)
 
 fun moveInDirection(
-    grid: Grid,
+    grid: Grid<Char>,
     startingPos: Position,
     direction: Direction2D,
 ): List<Position> {
